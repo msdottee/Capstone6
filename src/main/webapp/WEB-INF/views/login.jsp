@@ -1,58 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Login Page</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-</head>
-<body>
-<main class="container">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-		<article class="card mx-auto">
+<t:login>
+	<jsp:attribute name="title">Login</jsp:attribute>
+	<jsp:attribute name="name">Login</jsp:attribute>
+	<jsp:body>
+		<form action="/login-submit">
 
-			<section class="card-header">
+			<div class="form-group">
+				<label>Email:</label> <input class="form-control"
+											 name="email" type="text" required />
 
-				<h1>Login</h1>
+			</div>
 
-			</section>
+			<div class="form-group">
+				<label>Password:</label> <input class="form-control"
+												name="password" type="password" required />
+			</div>
 
-			<section class="card-body">
+			<button class="btn btn-block btn-secondary">Login</button>
 
-				<c:if test="${null != message}">
-					<div class="alert alert-danger" role="alert">
-							${message}
-					</div>
-				</c:if>
+		</form>
 
-				<form action="/login-submit">
-
-					<div class="form-group">
-						<label>Email:</label> <input class="form-control"
-							name="email" type="text" required />
-
-					</div>
-
-					<div class="form-group">
-						<label>Password:</label> <input class="form-control"
-							name="password" type="password" required />
-					</div>
-
-					<button class="btn btn-block btn-secondary">Login</button>
-
-				</form>
-				
-				<a href="/sign-up">Sign up</a>
-
-			</section>
-
-		</article>
-
-	</main>
-</body>
-</html>
+		<a href="/sign-up">Sign up</a>
+	</jsp:body>
+</t:login>

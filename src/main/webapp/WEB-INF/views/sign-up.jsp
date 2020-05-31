@@ -1,53 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Sign Up Page</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-	crossorigin="anonymous">
-</head>
-<body>
-	<main class="container">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-		<article class="card mx-auto">
-		
-			<section class="card-header">
+<t:login>
+	<jsp:attribute name="title">Sign-Up</jsp:attribute>
+	<jsp:attribute name="name">Sign-Up</jsp:attribute>
+	<jsp:body>
+		<form action="/signup-submit" method="post">
 
-				<h1>Sign Up</h1>
+			<div class="form-group">
+				<label>Name:</label>
+				<input class="form-control" name="name" type="text" required />
+			</div>
 
-			</section>
-			
-			<section class="card-body">
+			<div class="form-group">
+				<label>Email:</label>
+				<input class="form-control" name="email" type="text" required />
+			</div>
 
-				<form action="/signup-submit" method="post">
+			<div class="form-group">
+				<label>Password</label>
+				<input class="form-control" name="password" type="password" required />
+			</div>
 
-					<div class="form-group">
-						<label>Name:</label> 
-						<input class="form-control" name="name" type="text" required />
-					</div>
+			<button class="btn btn-block btn-secondary">Sign Me Up</button>
 
-					<div class="form-group">
-						<label>Email:</label> 
-						<input class="form-control" name="email" type="text" required />
-					</div>
-
-					<div class="form-group">
-						<label>Password</label> 
-						<input class="form-control" name="password" type="password" required />
-					</div>
-
-					<button class="btn btn-block btn-secondary">Sign Me Up</button>
-
-				</form>
-
-			</section>
-
-		</article>
-
-	</main>
-</body>
-</html>
+		</form>
+	</jsp:body>
+</t:login>
