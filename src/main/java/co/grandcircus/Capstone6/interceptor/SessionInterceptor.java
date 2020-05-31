@@ -17,7 +17,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURI();
 
-        if (!url.equals("/") && !url.equals("/login") && !url.equals("/login-submit") &&
+        if (!url.equals("") && !url.equals("/") && !url.equals("/login") && !url.equals("/login-submit") &&
                 !url.equals("/sign-up") && !url.equals("/signup-submit")) {
 
             HttpSession session = request.getSession(true);
