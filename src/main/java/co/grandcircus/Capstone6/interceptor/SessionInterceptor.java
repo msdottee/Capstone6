@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 @Component
 public class SessionInterceptor extends HandlerInterceptorAdapter {
 
+    public static final String USER_SESSION_ATTRIBUTE_NAME = "user";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURI();
@@ -22,7 +24,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
             HttpSession session = request.getSession(true);
 
-            if (session.getAttribute("user") == null) {
+            if (session.getAttribute(USER_SESSION_ATTRIBUTE_NAME) == null) {
                 setLoginFlashMessage(request, response);
 
                 response.sendRedirect(request.getContextPath() + "/");

@@ -17,9 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static co.grandcircus.Capstone6.interceptor.SessionInterceptor.USER_SESSION_ATTRIBUTE_NAME;
+
 @Controller
 public class TaskController {
-	
+
+
 	@Autowired
 	private TaskRepository taskRepo;
 
@@ -31,7 +34,7 @@ public class TaskController {
 	
 	@RequestMapping("/")
 	public String loginOrWelcomePage() {
-		if (session.getAttribute("user") != null) {
+		if (session.getAttribute(USER_SESSION_ATTRIBUTE_NAME) != null) {
 			return "welcome";
 		} else {
 			return "login";
@@ -43,7 +46,7 @@ public class TaskController {
 		Optional<User> foundUser = userRepo.findByEmailAndPassword(email, password);
 		
 		if (foundUser.isPresent()) {
-			session.setAttribute("user", foundUser.get());
+			session.setAttribute(USER_SESSION_ATTRIBUTE_NAME, foundUser.get());
 			return "redirect:/";
 		} else {
 			model.addAttribute("message", "Incorrect email or password.");
@@ -67,7 +70,7 @@ public class TaskController {
 	
 	@RequestMapping("/my-tasks")
 	public String taskList(Model model) {
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE_NAME);
 		model.addAttribute("tasks", taskRepo.findByUserId(user.getId()));
 		return "task-list";
 	}
@@ -79,7 +82,7 @@ public class TaskController {
 	
 	@PostMapping("/add-task")
 	public String submitAddTaskForm(Task task) {
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE_NAME);
 		user = userRepo.findById(user.getId()).get();
 		task.setUser(user);
 		taskRepo.save(task);
@@ -88,14 +91,14 @@ public class TaskController {
 	
 	@RequestMapping("/task-edit")
 	public String showEditTaskList(Model model) {
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE_NAME);
 		model.addAttribute("tasks", taskRepo.findByUserId(user.getId()));
 		return "task-edit";
 	}
 	
 	@PostMapping("/task-edit")
 	public String submitEditTaskList(SaveTasks saveTasks, Model model) {
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE_NAME);
 
 		for (SaveTask saveTask : saveTasks.getTasks()) {
 			Optional<Task> optionalTask = taskRepo.findByUserIdAndId(user.getId(), saveTask.getId());
