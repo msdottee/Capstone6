@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,12 @@
 			</section>
 
 			<section class="card-body">
+
+				<c:if test="${null != message}">
+					<div class="alert alert-danger" role="alert">
+							${message}
+					</div>
+				</c:if>
 
 				<form action="/login-submit">
 
