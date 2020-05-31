@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Task List Page</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-<h1><c:out value="${user.name}"></c:out>'s Tasks</h1>
+	<h1><c:out value="${user.name}"></c:out>'s Tasks</h1>
 	<table class="table">
 		<thead>
 			<tr>
@@ -26,11 +26,11 @@
 				<tr>
 					<td><c:out value="${task.description}" /></td>
 					<td><c:out value="${task.dueDate}" /></td>
-					<td><c:out value="${task.complete}" /></td>
+					<td>${task.complete ? "✔" : "---"}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="/add-task">Add a Task</a>
+	<a href="/add-task">Add a Task</a> <a class="btn btn-info" href="/task-edit">Edit</a>
 </body>
 </html>

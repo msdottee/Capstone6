@@ -1,9 +1,11 @@
 package co.grandcircus.Capstone6;
 
-import java.util.Optional;
-
-import javax.servlet.http.HttpSession;
-
+import co.grandcircus.Capstone6.dao.TaskRepository;
+import co.grandcircus.Capstone6.dao.UserRepository;
+import co.grandcircus.Capstone6.entity.Task;
+import co.grandcircus.Capstone6.entity.User;
+import co.grandcircus.Capstone6.model.SaveTask;
+import co.grandcircus.Capstone6.model.SaveTasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import co.grandcircus.Capstone6.dao.TaskRepository;
-import co.grandcircus.Capstone6.dao.UserRepository;
-import co.grandcircus.Capstone6.entity.Task;
-import co.grandcircus.Capstone6.entity.User;
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 public class TaskController {
-
 	
 	@Autowired
 	private TaskRepository taskRepo;
+
 	@Autowired 
 	private UserRepository userRepo;
+
 	@Autowired 
 	private HttpSession session;
 	
@@ -83,6 +84,29 @@ public class TaskController {
 		task.setUser(user);
 		taskRepo.save(task);
 		return "redirect:/my-tasks";
+	}
+	
+	@RequestMapping("/task-edit")
+	public String showEditTaskList(Model model) {
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("tasks", taskRepo.findByUserId(user.getId()));
+		return "task-edit";
+	}
+	
+	@PostMapping("/task-edit")
+	public String submitEditTaskList(SaveTasks saveTasks, Model model) {
+		User user = (User) session.getAttribute("user");
+
+		for (SaveTask saveTask : saveTasks.getTasks()) {
+			Optional<Task> optionalTask = taskRepo.findByUserIdAndId(user.getId(), saveTask.getId());
+
+			optionalTask.ifPresent(task -> {
+				task.setComplete(saveTask.isComplete());
+				taskRepo.save(task);
+			});
+		}
+
+		return "redirect:my-tasks";
 	}
 	
 	@RequestMapping("/logout")
