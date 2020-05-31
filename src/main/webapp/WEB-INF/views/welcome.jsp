@@ -6,6 +6,11 @@
     <jsp:attribute name="title">Welcome</jsp:attribute>
     <jsp:body>
         <h1>Welcome <c:out value="${user.name}"/>!</h1>
-        <a href="/my-tasks">To Do List</a> <a href="/logout">Logout</a>
+        <p>
+            <a href="/my-tasks">My Tasks</a>
+        </p>
+        <p>
+            <img src="/assets/img/pusheencar.gif" class="img-fluid" alt="Get Stuff Done!">
+        </p>
     </jsp:body>
 </t:page>

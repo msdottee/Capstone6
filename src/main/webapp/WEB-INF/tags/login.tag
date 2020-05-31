@@ -9,7 +9,7 @@
         <jsp:invoke fragment="title"/>
     </jsp:attribute>
     <jsp:body>
-        <main class="container">
+        <main class="login container">
 
             <article class="card mx-auto">
 

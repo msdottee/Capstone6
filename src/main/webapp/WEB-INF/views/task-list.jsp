@@ -3,7 +3,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:page>
-	<jsp:attribute name="title">Task List</jsp:attribute>
+	<jsp:attribute name="title">My Tasks</jsp:attribute>
 	<jsp:body>
 		<h1><c:out value="${user.name}"/>'s Tasks</h1>
 		<table class="table">

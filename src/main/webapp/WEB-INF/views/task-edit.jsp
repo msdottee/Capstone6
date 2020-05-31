@@ -21,9 +21,9 @@
 					<c:forEach var="task" varStatus="status" items="${tasks}">
 						<input name="tasks[${status.index}].id" type="hidden" value="${task.id}">
 						<tr>
-							<td><c:out value="${task.description}" /></td>
-							<td><c:out value="${task.dueDate}" /></td>
-							<td><c:out value="${task.complete}" /></td>
+							<td>${task.description}</td>
+							<td>${task.dueDate}</td>
+							<td>${task.complete ? "✔" : "---"}</td>
 							<td>
 								<label for="task-done">Task Done?</label>
 								<input id="task-done" type="checkbox" name="tasks[${status.index}].complete"
