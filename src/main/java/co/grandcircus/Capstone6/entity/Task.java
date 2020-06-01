@@ -23,34 +23,53 @@ public class Task {
 	private boolean complete;
 	@ManyToOne
 	private User user;
-	
+
+	public Task() {
+	}
+
+	public Task(String description, LocalDate dueDate, boolean complete, User user) {
+		this.description = description;
+		this.dueDate = dueDate;
+		this.complete = complete;
+		this.user = user;
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
+
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
+
 	public boolean isComplete() {
 		return complete;
 	}
+
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}

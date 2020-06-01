@@ -109,15 +109,15 @@ public class TaskController {
 			});
 		}
 
-		return "redirect:my-tasks";
+		return "redirect:/my-tasks";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(RedirectAttributes redir) {
-		
+		session.invalidate();
+
 		redir.addFlashAttribute("message","Logged out successfully");
 
-		session.invalidate();
 		return "redirect:/";
 	}
 }
